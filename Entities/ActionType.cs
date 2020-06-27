@@ -8,6 +8,7 @@ namespace BlueSite.Data.Entities
 {
     public class ActionType
     {
+        [Key]
         public string ActionTypeId { get; set; }
         [Required]
         public string Name { get; set; }

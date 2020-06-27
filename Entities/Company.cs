@@ -7,6 +7,7 @@ namespace BlueSite.Data.Entities
 {
     public class Company
     {
+        [Key]
         public int CompanyId {  get; set; }
         [MaxLength(100)]
         public string Name { get; set; }

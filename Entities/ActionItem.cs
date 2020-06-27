@@ -8,6 +8,7 @@ namespace BlueSite.Data.Entities
 {
     public class ActionItem
     {
+        [Key]
         public int? ActionItemId { get; set; }
         [Required]
         public string Title { get; set; }
@@ -22,6 +23,7 @@ namespace BlueSite.Data.Entities
 
         //public ICollection<Company> Companies { get; set; }
         //public ICollection<Contact> Contacts { get; set; }
-        //public ICollection<Note> Notes { get; set; }
+        public ICollection<Note> Notes { get; set; }
+        public ICollection<ActionItemNotes> ActionItemNotes { get; set; }
     }
 }

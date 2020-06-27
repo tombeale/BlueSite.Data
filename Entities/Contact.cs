@@ -5,6 +5,7 @@ namespace BlueSite.Data.Entities
 {
     public class Contact
     {
+		[Key]
 		public int ContactId { get; set; }
 		[MaxLength(40)]
 		public string FirstName { get; set; }

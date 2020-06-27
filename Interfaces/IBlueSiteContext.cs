@@ -13,6 +13,7 @@ namespace BlueSite.Data.Interfaces
         DbSet<Note> Notes { get; set; }
         DbSet<Company> Companies { get; set; }
         DbSet<Contact> Contacts { get; set; }
+        DbSet<ActionItem> ActionItemNotes { get; set; }
     }
 
 }

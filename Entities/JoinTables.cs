@@ -4,11 +4,11 @@ using System.Text;
 
 namespace BlueSite.Data.Entities
 {
-    class ActionNote
+    public class ActionItemNotes
     {
         public int ActionItemId { get; set; }
+        public ActionItem ActionItem { get; set; }
         public int NoteId { get; set; }
-        public Action ActionItem { get; set; }
         public Note Note { get; set; }
 
     }
