@@ -20,6 +20,7 @@ namespace BlueSite.Data.Entities
         public string status { get; set; }
         public string SearchID { get; set; }
         public bool IsDone { get; set; } = false;
+        public int? Parent { get; set; }
 
         //public ICollection<Company> Companies { get; set; }
         //public ICollection<Contact> Contacts { get; set; }

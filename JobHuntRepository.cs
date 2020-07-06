@@ -20,7 +20,7 @@ namespace BlueSite.Data
         {
             get
             {
-                return _context.ActionItems.ToList();
+                return _context.ActionItems.Include(b => b.Notes).ToList();
             }
         }
 
@@ -41,7 +41,7 @@ namespace BlueSite.Data
 
         public ActionItem GetAction(int id)
         {
-            return _context.ActionItems.Where(x => x.ActionItemId == id).FirstOrDefault();
+            return _context.ActionItems.Where(x => x.ActionItemId == id).Include(b => b.Notes).FirstOrDefault();
         }
 
         public Company GetCompany(int id)
@@ -54,18 +54,27 @@ namespace BlueSite.Data
             return _context.Notes.Where(x => x.Type == type && x.NoteId == id).ToList();
         }
 
-        public bool AddNote(Note note)
+        public Note GetNote(int id)
+        {
+            return _context.Notes.Where(x => x.NoteId == id).FirstOrDefault();
+        }
+
+        public string AddNote(int actionItemId, Note note)
         {
             try
             {
-                _context.Notes.Add(note);
-                _context.SaveChanges();
+                ActionItem action = _context.ActionItems.Where(a => a.ActionItemId == actionItemId).Include(b => b.Notes).First();
+                if (action != null)
+                {
+                    action.Notes.Add(note);
+                    _context.SaveChanges();
+                }
+                return "";
             }
             catch (Exception e)
             {
-                return false;
+                return e.Message;
             }
-            return true;
         }
     }
 }

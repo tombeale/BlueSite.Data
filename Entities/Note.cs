@@ -10,11 +10,10 @@ namespace BlueSite.Data.Entities
         public int NoteId {  get; set; }
         public DateTime TimeStamp { get; set; } = DateTime.Now;
         [MaxLength(25)]
-        public string User { get; set; }
+        public string User { get; set; } = "tom";
         [MaxLength(20)]
-        public string Type { get; set; }
-        public int ParentId { get; set; }
-        public string Text { get; set; }
+        public string Type { get; set; } = "note";
+        public string Text { get; set; } = "";
 
         public int? CompanyId { get; set; }
         public int? ContactId { get; set; }

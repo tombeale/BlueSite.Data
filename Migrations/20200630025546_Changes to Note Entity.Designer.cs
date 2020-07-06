@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200630025546_Changes to Note Entity")]
+    partial class ChangestoNoteEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,8 +30,6 @@ namespace BlueSite.Data.Migrations
                     b.Property<DateTime?>("EndDate");
 
                     b.Property<bool>("IsDone");
-
-                    b.Property<int?>("Parent");
 
                     b.Property<string>("SearchID");
 
@@ -95,9 +95,6 @@ namespace BlueSite.Data.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(100);
 
-                    b.Property<string>("Phone")
-                        .HasMaxLength(20);
-
                     b.Property<string>("SearchId")
                         .HasMaxLength(25);
 
@@ -105,10 +102,7 @@ namespace BlueSite.Data.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Type")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Website")
-                        .HasMaxLength(250);
+                        .HasMaxLength(25);
 
                     b.Property<string>("Zip")
                         .HasMaxLength(10);

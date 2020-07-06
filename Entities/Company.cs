@@ -11,7 +11,7 @@ namespace BlueSite.Data.Entities
         public int CompanyId {  get; set; }
         [MaxLength(100)]
         public string Name { get; set; }
-        [MaxLength(25)]
+        [MaxLength(50)]
         public string Type { get; set; }
 
         [MaxLength(50)]
@@ -25,6 +25,10 @@ namespace BlueSite.Data.Entities
         [MaxLength(10)]
         public string Zip { get; set; }
 
+        [MaxLength(20)]
+        public string Phone { get; set; }
+        [MaxLength(250)]
+        public string Website { get; set; }
         [MaxLength(25)]
         public string SearchId { get; set; }
 

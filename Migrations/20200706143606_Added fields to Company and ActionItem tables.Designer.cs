@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200706143606_Added fields to Company and ActionItem tables")]
+    partial class AddedfieldstoCompanyandActionItemtables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
