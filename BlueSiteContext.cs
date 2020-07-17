@@ -7,9 +7,13 @@ namespace BlueSite.Data.Entities
         public DbSet<ActionItem> ActionItems { get; set; }
         public DbSet<ActionType> ActionTypes { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyType> CompanyTypes { get; set; }
+        public DbSet<CompanyInterest> CompanyInterests { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Note> Notes { get; set; }
+        public DbSet<Phone> Phones { get; set; }
         public DbSet<ActionItemNotes> ActionItemNotes { get; set; }
+        public DbSet<Project> Projects { get; set; }
         public BlueSiteContext(DbContextOptions<BlueSiteContext> options)
             : base(options)
         { }

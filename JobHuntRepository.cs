@@ -1,5 +1,6 @@
 ﻿using BlueSite.Data.Entities;
 using BlueSite.Data.Interfaces;
+using BlueSite.Data.Migrations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace BlueSite.Data
         {
             _context = context;
         }
+
+        /* ***********************************************************
+         * Actions
+         * ******************************************************** */
         
         public List<ActionItem> AllActions
         {
@@ -24,13 +29,6 @@ namespace BlueSite.Data
             }
         }
 
-        public List<Company> AllCompanies
-        {
-            get
-            {
-                return _context.Companies.ToList();
-            }
-        }
         public ActionType[] Types
         {
             get
@@ -44,11 +42,63 @@ namespace BlueSite.Data
             return _context.ActionItems.Where(x => x.ActionItemId == id).Include(b => b.Notes).FirstOrDefault();
         }
 
+        public List<string> GetActionSetIdList()
+        {
+            return _context.ActionItems.OrderBy(x => x.SetId).Select(x => x.SetId).Distinct().ToList();
+        }
+
+        public List<string> GetActionSetIdListForToDos()
+        {
+            List<string> returnList = _context.ActionItems.OrderBy(x => x.SetId).Select(x => x.SetId).Distinct().ToList();
+            returnList.Insert(0, "All");
+            return returnList;
+        }
+
+        /* ***********************************************************
+         * Companies
+         * ******************************************************** */
+        public List<Company> AllCompanies
+        {
+            get
+            {
+                return _context.Companies.ToList();
+            }
+        }
         public Company GetCompany(int id)
         {
             return _context.Companies.Where(x => x.CompanyId == id).FirstOrDefault();
         }
 
+        public CompanyType[] GetCompanyTypes()
+        {
+            return _context.CompanyTypes.OrderBy(t => t.Name).ToArray();
+        }
+
+        public CompanyInterest[] GetCompanyIntrests()
+        {
+            return _context.CompanyInterests.OrderBy(t => t.Name).ToArray();
+        }
+
+        /* ***********************************************************
+         * Contacts
+         * ******************************************************** */
+        public List<Contact> AllContacts
+        {
+            get
+            {
+                return _context.Contacts.ToList();
+            }
+        }
+        public Contact GetContact(int id)
+        {
+            return _context.Contacts.Where(x => x.ContactId == id).FirstOrDefault();
+        }
+
+
+
+        /* ***********************************************************
+         * Notes
+         * ******************************************************** */
         public List<Note> GetNotes(string type, int id)
         {
             return _context.Notes.Where(x => x.Type == type && x.NoteId == id).ToList();

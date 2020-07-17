@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200716172123_Made the order fields for companyTypes and CompanyInterests nullable")]
+    partial class MadetheorderfieldsforcompanyTypesandCompanyInterestsnullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,19 +222,6 @@ namespace BlueSite.Data.Migrations
                     b.HasIndex("ActionItemId");
 
                     b.ToTable("Notes");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.Phone", b =>
-                {
-                    b.Property<string>("Number")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(20);
-
-                    b.HasKey("Number");
-
-                    b.ToTable("Phones");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.Project", b =>

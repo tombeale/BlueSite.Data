@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200706191115_Pade Projects date fields nullable")]
+    partial class PadeProjectsdatefieldsnullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,23 +35,19 @@ namespace BlueSite.Data.Migrations
 
                     b.Property<int?>("ProjectId");
 
-                    b.Property<string>("SearchID")
-                        .HasMaxLength(50);
+                    b.Property<string>("SearchID");
 
-                    b.Property<string>("SetId")
-                        .HasMaxLength(50);
+                    b.Property<string>("SetId");
 
                     b.Property<DateTime?>("StartDate");
 
-                    b.Property<string>("Status");
-
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(250);
+                        .IsRequired();
 
                     b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                        .IsRequired();
+
+                    b.Property<string>("status");
 
                     b.HasKey("ActionItemId");
 
@@ -98,12 +96,6 @@ namespace BlueSite.Data.Migrations
                     b.Property<string>("City")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("Interest")
-                        .HasMaxLength(50);
-
                     b.Property<string>("Name")
                         .HasMaxLength(100);
 
@@ -128,38 +120,6 @@ namespace BlueSite.Data.Migrations
                     b.HasKey("CompanyId");
 
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.CompanyInterest", b =>
-                {
-                    b.Property<string>("CompanyInterestId")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<int?>("Order");
-
-                    b.HasKey("CompanyInterestId");
-
-                    b.ToTable("CompanyInterests");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.CompanyType", b =>
-                {
-                    b.Property<string>("CompanyTypeId")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<int?>("Order");
-
-                    b.HasKey("CompanyTypeId");
-
-                    b.ToTable("CompanyTypes");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.Contact", b =>
@@ -220,19 +180,6 @@ namespace BlueSite.Data.Migrations
                     b.HasIndex("ActionItemId");
 
                     b.ToTable("Notes");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.Phone", b =>
-                {
-                    b.Property<string>("Number")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(20);
-
-                    b.HasKey("Number");
-
-                    b.ToTable("Phones");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.Project", b =>

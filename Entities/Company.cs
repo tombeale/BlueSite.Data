@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BlueSite.Data.Entities
 {
@@ -11,8 +8,13 @@ namespace BlueSite.Data.Entities
         public int CompanyId {  get; set; }
         [MaxLength(100)]
         public string Name { get; set; }
+        [MaxLength(255)]
+        public string Description { get; set; }
+
         [MaxLength(50)]
         public string Type { get; set; }
+        [MaxLength(50)]
+        public string Interest { get; set; }
 
         [MaxLength(50)]
         public string Address1 { get; set; }

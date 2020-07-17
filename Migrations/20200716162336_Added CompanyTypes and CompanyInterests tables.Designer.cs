@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200716162336_Added CompanyTypes and CompanyInterests tables")]
+    partial class AddedCompanyTypesandCompanyIntereststables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,7 +141,7 @@ namespace BlueSite.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int?>("Order");
+                    b.Property<int>("Order");
 
                     b.HasKey("CompanyInterestId");
 
@@ -155,7 +157,7 @@ namespace BlueSite.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int?>("Order");
+                    b.Property<int>("Order");
 
                     b.HasKey("CompanyTypeId");
 
@@ -220,19 +222,6 @@ namespace BlueSite.Data.Migrations
                     b.HasIndex("ActionItemId");
 
                     b.ToTable("Notes");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.Phone", b =>
-                {
-                    b.Property<string>("Number")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(20);
-
-                    b.HasKey("Number");
-
-                    b.ToTable("Phones");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.Project", b =>
