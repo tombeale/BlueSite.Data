@@ -12,4 +12,12 @@ namespace BlueSite.Data.Entities
         public Note Note { get; set; }
 
     }
+    public class CompanyPhones
+    {
+        public int CompanyId { get; set; }
+        public Company Company { get; set; }
+        public int PhoneId { get; set; }
+        public Phone Phone { get; set; }
+
+    }
 }

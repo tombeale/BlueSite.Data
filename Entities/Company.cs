@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlueSite.Data.Entities
 {
@@ -34,7 +35,10 @@ namespace BlueSite.Data.Entities
         [MaxLength(25)]
         public string SearchId { get; set; }
 
-        //public ICollection<Contact> Contacts { get; set; }
+        public List<Phone> Phones { get; set; }
+        public IEnumerable<CompanyPhones> CompanyPhones {  get; set; }
+
+       //public ICollection<Contact> Contacts { get; set; }
         //public ICollection<Note> Notes { get; set; }
     }
 }

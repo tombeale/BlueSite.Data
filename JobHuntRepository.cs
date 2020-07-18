@@ -94,6 +94,13 @@ namespace BlueSite.Data
             return _context.Contacts.Where(x => x.ContactId == id).FirstOrDefault();
         }
 
+        /* ***********************************************************
+         * Phones
+         * ******************************************************** */
+        public List<PhoneType> GetPhoneTypes()
+        {
+            return _context.PhoneTypes.OrderBy(p => p.SortOrder).ToList();
+        }
 
 
         /* ***********************************************************

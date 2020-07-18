@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200717131258_Added PhoneTypes table")]
+    partial class AddedPhoneTypestable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,19 +148,6 @@ namespace BlueSite.Data.Migrations
                     b.ToTable("CompanyInterests");
                 });
 
-            modelBuilder.Entity("BlueSite.Data.Entities.CompanyPhones", b =>
-                {
-                    b.Property<int>("CompanyId");
-
-                    b.Property<int>("PhoneId");
-
-                    b.HasKey("CompanyId", "PhoneId");
-
-                    b.HasIndex("PhoneId");
-
-                    b.ToTable("CompanyPhones");
-                });
-
             modelBuilder.Entity("BlueSite.Data.Entities.CompanyType", b =>
                 {
                     b.Property<string>("CompanyTypeId")
@@ -237,23 +226,13 @@ namespace BlueSite.Data.Migrations
 
             modelBuilder.Entity("BlueSite.Data.Entities.Phone", b =>
                 {
-                    b.Property<int>("PhoneId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CompanyId");
-
-                    b.Property<int?>("ContactId");
-
                     b.Property<string>("Number")
                         .HasMaxLength(20);
 
                     b.Property<string>("Type")
                         .HasMaxLength(20);
 
-                    b.HasKey("PhoneId");
-
-                    b.HasIndex("CompanyId");
+                    b.HasKey("Number");
 
                     b.ToTable("Phones");
                 });
@@ -315,33 +294,11 @@ namespace BlueSite.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BlueSite.Data.Entities.CompanyPhones", b =>
-                {
-                    b.HasOne("BlueSite.Data.Entities.Phone", "Phone")
-                        .WithMany("CompanyPhones")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlueSite.Data.Entities.Company", "Company")
-                        .WithMany("CompanyPhones")
-                        .HasForeignKey("PhoneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("BlueSite.Data.Entities.Note", b =>
                 {
                     b.HasOne("BlueSite.Data.Entities.ActionItem", "Action")
                         .WithMany("Notes")
                         .HasForeignKey("ActionItemId");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.Phone", b =>
-                {
-                    b.HasOne("BlueSite.Data.Entities.Company", "Company")
-                        .WithMany("Phones")
-                        .HasForeignKey("CompanyId");
                 });
 #pragma warning restore 612, 618
         }
