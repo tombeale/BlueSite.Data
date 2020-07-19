@@ -18,6 +18,14 @@ namespace BlueSite.Data.Entities
         public Company Company { get; set; }
         public int PhoneId { get; set; }
         public Phone Phone { get; set; }
+    }
+
+    public class ContactPhones
+    {
+        public int ContactId { get; set; }
+        public Contact Contact { get; set; }
+        public int PhoneId { get; set; }
+        public Phone Phone { get; set; }
 
     }
 }

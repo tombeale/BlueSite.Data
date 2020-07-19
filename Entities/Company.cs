@@ -37,6 +37,7 @@ namespace BlueSite.Data.Entities
 
         public List<Phone> Phones { get; set; }
         public IEnumerable<CompanyPhones> CompanyPhones {  get; set; }
+        public IEnumerable<CompanyPhones> ContactPhones {  get; set; }
 
        //public ICollection<Contact> Contacts { get; set; }
         //public ICollection<Note> Notes { get; set; }

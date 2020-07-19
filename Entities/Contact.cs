@@ -21,7 +21,10 @@ namespace BlueSite.Data.Entities
 		[MaxLength(25)]
 		public string SearchID { get; set; }
 
-		//public ICollection<Company> Companies { get; set; }
-		//public ICollection<Note> Notes { get; set; }
+		public ICollection<Company> Companies { get; set; }
+        public List<Phone> Phones { get; set; }
+		public List<Note> Notes { get; set; }
+
+		public List<ContactPhones> ContactPhones { get; set; }
 	}
 }

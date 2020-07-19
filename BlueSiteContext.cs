@@ -16,7 +16,8 @@ namespace BlueSite.Data.Entities
         public DbSet<Project> Projects { get; set; }
 
         public DbSet<ActionItemNotes> ActionItemNotes { get; set; }
-        //public DbSet<CompanyPhones> CompanyPhones { get; set; }
+        public DbSet<CompanyPhones> CompanyPhones { get; set; }
+        public DbSet<ContactPhones> ContactPhones { get; set; }
 
 
         public BlueSiteContext(DbContextOptions<BlueSiteContext> options)
@@ -45,6 +46,17 @@ namespace BlueSite.Data.Entities
             modelBuilder.Entity<CompanyPhones>()
                 .HasOne(cp => cp.Company)
                 .WithMany(c => c.CompanyPhones)
+                .HasForeignKey(c => c.PhoneId);
+
+            modelBuilder.Entity<ContactPhones>()
+                .HasKey(cp => new { cp.ContactId, cp.PhoneId });
+            modelBuilder.Entity<ContactPhones>()
+                .HasOne(cp => cp.Phone)
+                .WithMany(p => p.ContactPhones)
+                .HasForeignKey(bc => bc.ContactId);
+            modelBuilder.Entity<ContactPhones>()
+                .HasOne(cp => cp.Contact)
+                .WithMany(c => c.ContactPhones)
                 .HasForeignKey(c => c.PhoneId);
 
                

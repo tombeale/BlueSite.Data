@@ -11,6 +11,14 @@
     <Compile Remove="Migrations\20200718155356_Added navigation property for Company-Phones.Designer.cs" />
     <Compile Remove="Migrations\20200718181157_Finished navigation properties for Company-Phones.cs" />
     <Compile Remove="Migrations\20200718181157_Finished navigation properties for Company-Phones.Designer.cs" />
+    <Compile Remove="Migrations\20200718233908_Added second key for Company.cs" />
+    <Compile Remove="Migrations\20200718233908_Added second key for Company.Designer.cs" />
+    <Compile Remove="Migrations\20200718234226_Fixes to Relationships.cs" />
+    <Compile Remove="Migrations\20200718234226_Fixes to Relationships.Designer.cs" />
+    <Compile Remove="Migrations\20200718234914_Fixes to Relationships.cs" />
+    <Compile Remove="Migrations\20200718234914_Fixes to Relationships.Designer.cs" />
+    <Compile Remove="Migrations\20200718235152_Fixes to Relationships.cs" />
+    <Compile Remove="Migrations\20200718235152_Fixes to Relationships.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -103,6 +103,17 @@ namespace BlueSite.Data
         }
 
 
+        public List<Phone> GetPhonesForCompany(int CompanyId)
+        {
+            return _context.Phones.Where(p => p.CompanyId == CompanyId).ToList();
+        }
+
+        public List<Phone> GetPhonesForContact(int ContactId)
+        {
+            return _context.Phones.Where(p => p.ContactId == ContactId).ToList();
+        }
+
+
         /* ***********************************************************
          * Notes
          * ******************************************************** */

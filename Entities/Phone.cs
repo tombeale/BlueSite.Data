@@ -21,6 +21,7 @@ namespace BlueSite.Data.Entities
         public int? CompanyId {  get; set; }
 
         public IEnumerable<CompanyPhones> CompanyPhones {  get; set; }
+        public IEnumerable<ContactPhones> ContactPhones {  get; set; }
 
         public Phone()
         {

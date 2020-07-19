@@ -98,6 +98,8 @@ namespace BlueSite.Data.Migrations
                     b.Property<string>("City")
                         .HasMaxLength(50);
 
+                    b.Property<int?>("ContactId");
+
                     b.Property<string>("Description")
                         .HasMaxLength(255);
 
@@ -127,6 +129,8 @@ namespace BlueSite.Data.Migrations
 
                     b.HasKey("CompanyId");
 
+                    b.HasIndex("ContactId");
+
                     b.ToTable("Companies");
                 });
 
@@ -152,7 +156,11 @@ namespace BlueSite.Data.Migrations
 
                     b.Property<int>("PhoneId");
 
+                    b.Property<int?>("CompanyId2");
+
                     b.HasKey("CompanyId", "PhoneId");
+
+                    b.HasIndex("CompanyId2");
 
                     b.HasIndex("PhoneId");
 
@@ -206,6 +214,19 @@ namespace BlueSite.Data.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("BlueSite.Data.Entities.ContactPhones", b =>
+                {
+                    b.Property<int>("ContactId");
+
+                    b.Property<int>("PhoneId");
+
+                    b.HasKey("ContactId", "PhoneId");
+
+                    b.HasIndex("PhoneId");
+
+                    b.ToTable("ContactPhones");
+                });
+
             modelBuilder.Entity("BlueSite.Data.Entities.Note", b =>
                 {
                     b.Property<int>("NoteId")
@@ -232,6 +253,8 @@ namespace BlueSite.Data.Migrations
 
                     b.HasIndex("ActionItemId");
 
+                    b.HasIndex("ContactId");
+
                     b.ToTable("Notes");
                 });
 
@@ -254,6 +277,8 @@ namespace BlueSite.Data.Migrations
                     b.HasKey("PhoneId");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("ContactId");
 
                     b.ToTable("Phones");
                 });
@@ -315,6 +340,13 @@ namespace BlueSite.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("BlueSite.Data.Entities.Company", b =>
+                {
+                    b.HasOne("BlueSite.Data.Entities.Contact", null)
+                        .WithMany("Companies")
+                        .HasForeignKey("ContactId");
+                });
+
             modelBuilder.Entity("BlueSite.Data.Entities.CompanyPhones", b =>
                 {
                     b.HasOne("BlueSite.Data.Entities.Phone", "Phone")
@@ -323,8 +355,27 @@ namespace BlueSite.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BlueSite.Data.Entities.Company", null)
+                        .WithMany("ContactPhones")
+                        .HasForeignKey("CompanyId2");
+
                     b.HasOne("BlueSite.Data.Entities.Company", "Company")
                         .WithMany("CompanyPhones")
+                        .HasForeignKey("PhoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BlueSite.Data.Entities.ContactPhones", b =>
+                {
+                    b.HasOne("BlueSite.Data.Entities.Phone", "Phone")
+                        .WithMany("ContactPhones")
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlueSite.Data.Entities.Contact", "Contact")
+                        .WithMany("ContactPhones")
                         .HasForeignKey("PhoneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -335,6 +386,10 @@ namespace BlueSite.Data.Migrations
                     b.HasOne("BlueSite.Data.Entities.ActionItem", "Action")
                         .WithMany("Notes")
                         .HasForeignKey("ActionItemId");
+
+                    b.HasOne("BlueSite.Data.Entities.Contact", null)
+                        .WithMany("Notes")
+                        .HasForeignKey("ContactId");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.Phone", b =>
@@ -342,6 +397,10 @@ namespace BlueSite.Data.Migrations
                     b.HasOne("BlueSite.Data.Entities.Company", "Company")
                         .WithMany("Phones")
                         .HasForeignKey("CompanyId");
+
+                    b.HasOne("BlueSite.Data.Entities.Contact", null)
+                        .WithMany("Phones")
+                        .HasForeignKey("ContactId");
                 });
 #pragma warning restore 612, 618
         }
