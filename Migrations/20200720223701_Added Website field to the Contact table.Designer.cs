@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200720223701_Added Website field to the Contact table")]
+    partial class AddedWebsitefieldtotheContacttable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,8 +108,6 @@ namespace BlueSite.Data.Migrations
                     b.Property<string>("Interest")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Location");
-
                     b.Property<string>("Name")
                         .HasMaxLength(100);
 
@@ -134,43 +134,6 @@ namespace BlueSite.Data.Migrations
                     b.HasIndex("ContactId");
 
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.CompanyActionRelationship", b =>
-                {
-                    b.Property<int>("CompanyId");
-
-                    b.Property<int>("ActionId");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(40);
-
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(40);
-
-                    b.HasKey("CompanyId", "ActionId");
-
-                    b.HasAlternateKey("ActionId", "CompanyId");
-
-                    b.ToTable("CompanyActionRelationship");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.CompanyContactRelationship", b =>
-                {
-                    b.Property<int>("CompanyId");
-
-                    b.Property<int>("ContactId");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(40);
-
-                    b.Property<string>("Notes");
-
-                    b.HasKey("CompanyId", "ContactId");
-
-                    b.ToTable("CompanyContactRelationships");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.CompanyInterest", b =>
@@ -254,27 +217,6 @@ namespace BlueSite.Data.Migrations
                     b.HasKey("ContactId");
 
                     b.ToTable("Contacts");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.ContactActionRelationship", b =>
-                {
-                    b.Property<int>("ContactId");
-
-                    b.Property<int>("ActionId");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(40);
-
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(40);
-
-                    b.HasKey("ContactId", "ActionId");
-
-                    b.HasAlternateKey("ActionId", "ContactId");
-
-                    b.ToTable("ContactActionRelationship");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.ContactPhones", b =>

@@ -18,9 +18,37 @@ namespace BlueSite.Data
         }
 
         /* ***********************************************************
+         * Users / Preferences
+         * ******************************************************** */
+        public User GetUserFromSignon(string signon = "tom")
+        {
+            return _context.Users.Where(u => u.SignOn == signon).FirstOrDefault();
+        }
+
+        public string GetUserPref(int userId, string pref, string defValue)
+        {
+            UserPref p = _context.UserPrefs.Where(up => up.UserId == userId && up.Pref == pref).FirstOrDefault();
+            return (p != null) ? p.Value : defValue;
+        }
+
+        public void SaveUserPref(int userId, string pref, string value)
+        {
+            UserPref p = _context.UserPrefs.Where(up => up.UserId == userId && up.Pref == pref).FirstOrDefault();
+            if (p == null)
+            {
+                _context.UserPrefs.Add(new UserPref(userId, pref, value));
+            }
+            else
+            {
+                p.Value = value;
+            }
+            _context.SaveChanges();
+        }
+
+        
+        /* ***********************************************************
          * Actions
          * ******************************************************** */
-        
         public List<ActionItem> AllActions
         {
             get
@@ -61,7 +89,7 @@ namespace BlueSite.Data
         {
             get
             {
-                return _context.Companies.ToList();
+                return _context.Companies.Include(c => c.Phones).ToList();
             }
         }
         public Company GetCompany(int id)
@@ -86,12 +114,12 @@ namespace BlueSite.Data
         {
             get
             {
-                return _context.Contacts.ToList();
+                return _context.Contacts.Include(c => c.Phones).ToList();
             }
         }
         public Contact GetContact(int id)
         {
-            return _context.Contacts.Where(x => x.ContactId == id).FirstOrDefault();
+            return _context.Contacts.Where(x => x.ContactId == id).Include(c => c.Phones).FirstOrDefault();
         }
 
         /* ***********************************************************
@@ -101,7 +129,6 @@ namespace BlueSite.Data
         {
             return _context.PhoneTypes.OrderBy(p => p.SortOrder).ToList();
         }
-
 
         public List<Phone> GetPhonesForCompany(int CompanyId)
         {

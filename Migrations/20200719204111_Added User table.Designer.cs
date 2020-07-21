@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200719204111_Added User table")]
+    partial class AddedUsertable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,8 +108,6 @@ namespace BlueSite.Data.Migrations
                     b.Property<string>("Interest")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Location");
-
                     b.Property<string>("Name")
                         .HasMaxLength(100);
 
@@ -134,43 +134,6 @@ namespace BlueSite.Data.Migrations
                     b.HasIndex("ContactId");
 
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.CompanyActionRelationship", b =>
-                {
-                    b.Property<int>("CompanyId");
-
-                    b.Property<int>("ActionId");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(40);
-
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(40);
-
-                    b.HasKey("CompanyId", "ActionId");
-
-                    b.HasAlternateKey("ActionId", "CompanyId");
-
-                    b.ToTable("CompanyActionRelationship");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.CompanyContactRelationship", b =>
-                {
-                    b.Property<int>("CompanyId");
-
-                    b.Property<int>("ContactId");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(40);
-
-                    b.Property<string>("Notes");
-
-                    b.HasKey("CompanyId", "ContactId");
-
-                    b.ToTable("CompanyContactRelationships");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.CompanyInterest", b =>
@@ -248,33 +211,9 @@ namespace BlueSite.Data.Migrations
                     b.Property<string>("Title")
                         .HasMaxLength(40);
 
-                    b.Property<string>("Website")
-                        .HasMaxLength(250);
-
                     b.HasKey("ContactId");
 
                     b.ToTable("Contacts");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.ContactActionRelationship", b =>
-                {
-                    b.Property<int>("ContactId");
-
-                    b.Property<int>("ActionId");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(40);
-
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(40);
-
-                    b.HasKey("ContactId", "ActionId");
-
-                    b.HasAlternateKey("ActionId", "ContactId");
-
-                    b.ToTable("ContactActionRelationship");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.ContactPhones", b =>
@@ -330,9 +269,6 @@ namespace BlueSite.Data.Migrations
                     b.Property<int?>("CompanyId");
 
                     b.Property<int?>("ContactId");
-
-                    b.Property<string>("Ext")
-                        .HasMaxLength(5);
 
                     b.Property<string>("Number")
                         .HasMaxLength(20);
@@ -407,9 +343,6 @@ namespace BlueSite.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("Password")
-                        .HasMaxLength(100);
-
                     b.Property<string>("SignOn")
                         .IsRequired()
                         .HasMaxLength(30);
@@ -417,27 +350,6 @@ namespace BlueSite.Data.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.UserPref", b =>
-                {
-                    b.Property<int>("UserPrefId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Pref")
-                        .IsRequired();
-
-                    b.Property<int>("UserId");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("UserPrefId");
-
-                    b.HasIndex("UserId", "Pref")
-                        .IsUnique();
-
-                    b.ToTable("UserPrefs");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.ActionItemNotes", b =>

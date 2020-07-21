@@ -14,11 +14,14 @@ namespace BlueSite.Data.Entities
         public DbSet<Phone> Phones { get; set; }
         public DbSet<PhoneType> PhoneTypes { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserPref> UserPrefs { get; set; }
 
         public DbSet<ActionItemNotes> ActionItemNotes { get; set; }
         public DbSet<CompanyPhones> CompanyPhones { get; set; }
         public DbSet<ContactPhones> ContactPhones { get; set; }
 
+        public DbSet<CompanyContactRelationship> CompanyContactRelationships { get; set; }
 
         public BlueSiteContext(DbContextOptions<BlueSiteContext> options)
             : base(options)
@@ -59,7 +62,16 @@ namespace BlueSite.Data.Entities
                 .WithMany(c => c.ContactPhones)
                 .HasForeignKey(c => c.PhoneId);
 
-               
+            modelBuilder.Entity<UserPref>()
+                .HasIndex(p => new {p.UserId, p.Pref }).IsUnique();
+
+            modelBuilder.Entity<CompanyContactRelationship>()
+                .HasKey(c => new { c.CompanyId, c.ContactId });
+            modelBuilder.Entity<CompanyActionRelationship>()
+                .HasKey(c => new { c.CompanyId, c.ActionId });
+            modelBuilder.Entity<ContactActionRelationship>()
+                .HasKey(c => new { c.ContactId, c.ActionId });
+              
         }
 
 

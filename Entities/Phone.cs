@@ -10,15 +10,15 @@ namespace BlueSite.Data.Entities
 
         [MaxLength(20)]
         public string Number { get; set; }
-
+        [MaxLength(5)]
+        public string Ext { get; set; }
         [MaxLength(20)]
         public string Type { get; set; }
 
         public Company Company {  get; set; }
+        public int? CompanyId {  get; set; }
 
         public int? ContactId {  get; set; }
-
-        public int? CompanyId {  get; set; }
 
         public IEnumerable<CompanyPhones> CompanyPhones {  get; set; }
         public IEnumerable<ContactPhones> ContactPhones {  get; set; }

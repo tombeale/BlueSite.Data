@@ -32,6 +32,7 @@ namespace BlueSite.Data.Entities
         public string Phone { get; set; }
         [MaxLength(250)]
         public string Website { get; set; }
+        public string Location { get; set; }
         [MaxLength(25)]
         public string SearchId { get; set; }
 

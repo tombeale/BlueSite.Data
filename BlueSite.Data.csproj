@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20200718234914_Fixes to Relationships.Designer.cs" />
     <Compile Remove="Migrations\20200718235152_Fixes to Relationships.cs" />
     <Compile Remove="Migrations\20200718235152_Fixes to Relationships.Designer.cs" />
+    <Compile Remove="Migrations\20200719225619_Added UserPrefs table.cs" />
+    <Compile Remove="Migrations\20200719225619_Added UserPrefs table.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
