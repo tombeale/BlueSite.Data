@@ -13,6 +13,18 @@ namespace BlueSite.Data.Entities
 		public string LastName { get; set; }
 		[MaxLength(40)]
 		public string Title { get; set; }
+
+        [MaxLength(50)]
+        public string Address1 { get; set; }
+        [MaxLength(50)]
+        public string Address2 { get; set; }
+        [MaxLength(50)]
+        public string City { get; set; }
+        [MaxLength(50)]
+        public string State { get; set; }
+        [MaxLength(10)]
+        public string Zip { get; set; }
+
 		[MaxLength(20)]
 		public string Phone { get; set; }
 		[MaxLength(100)]

@@ -122,6 +122,12 @@ namespace BlueSite.Data
             return _context.Contacts.Where(x => x.ContactId == id).Include(c => c.Phones).FirstOrDefault();
         }
 
+        public List<Contact> GetUnrelatedCompanyContacts(int id)
+        {
+                return _context.Contacts.ToList();
+        }
+
+
         /* ***********************************************************
          * Phones
          * ******************************************************** */
