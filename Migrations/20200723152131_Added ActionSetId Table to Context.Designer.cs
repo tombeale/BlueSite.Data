@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200723152131_Added ActionSetId Table to Context")]
+    partial class AddedActionSetIdTabletoContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -320,25 +322,6 @@ namespace BlueSite.Data.Migrations
                     b.HasIndex("PhoneId");
 
                     b.ToTable("ContactPhones");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.ContactType", b =>
-                {
-                    b.Property<int>("ContactTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ContactTypeKey")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ContactTypeName")
-                        .HasMaxLength(50);
-
-                    b.Property<int?>("Order");
-
-                    b.HasKey("ContactTypeId");
-
-                    b.ToTable("ContactTypes");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.Note", b =>

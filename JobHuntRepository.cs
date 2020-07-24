@@ -70,9 +70,9 @@ namespace BlueSite.Data
             return _context.ActionItems.Where(x => x.ActionItemId == id).Include(b => b.Notes).FirstOrDefault();
         }
 
-        public List<string> GetActionSetIdList()
+        public List<ActionSetId> GetActionSetIdList()
         {
-            return _context.ActionItems.OrderBy(x => x.SetId).Select(x => x.SetId).Distinct().ToList();
+            return _context.ActionSetIds.OrderBy(x => x.Name).ToList();
         }
 
         public List<string> GetActionSetIdListForToDos()
@@ -125,6 +125,11 @@ namespace BlueSite.Data
         public List<Contact> GetUnrelatedCompanyContacts(int id)
         {
                 return _context.Contacts.ToList();
+        }
+
+        public List<ContactType> GetContactTypes()
+        {
+                return _context.ContactTypes.OrderBy(c => c.Order).ToList();
         }
 
 
