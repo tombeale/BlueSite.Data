@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200730162115_Added Campaigns table plus some keys")]
+    partial class AddedCampaignstableplussomekeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +56,6 @@ namespace BlueSite.Data.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("ActionItemId");
-
-                    b.HasIndex("CampaignId");
 
                     b.ToTable("ActionItems");
                 });
@@ -102,33 +102,6 @@ namespace BlueSite.Data.Migrations
                     b.HasKey("ActionTypeId");
 
                     b.ToTable("ActionTypes");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.Campaign", b =>
-                {
-                    b.Property<int>("CampaignId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CompanyId");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("Position")
-                        .HasMaxLength(160);
-
-                    b.Property<string>("RefNumber")
-                        .HasMaxLength(80);
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.HasKey("CampaignId");
-
-                    b.ToTable("Campaigns");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.Company", b =>
@@ -286,8 +259,6 @@ namespace BlueSite.Data.Migrations
                     b.Property<string>("Address2")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("CampaignId");
-
                     b.Property<string>("City")
                         .HasMaxLength(50);
 
@@ -319,8 +290,6 @@ namespace BlueSite.Data.Migrations
                         .HasMaxLength(10);
 
                     b.HasKey("ContactId");
-
-                    b.HasIndex("CampaignId");
 
                     b.ToTable("Contacts");
                 });
@@ -553,13 +522,6 @@ namespace BlueSite.Data.Migrations
                     b.ToTable("UserPrefs");
                 });
 
-            modelBuilder.Entity("BlueSite.Data.Entities.ActionItem", b =>
-                {
-                    b.HasOne("BlueSite.Data.Entities.Campaign", null)
-                        .WithMany("Actions")
-                        .HasForeignKey("CampaignId");
-                });
-
             modelBuilder.Entity("BlueSite.Data.Entities.ActionItemNotes", b =>
                 {
                     b.HasOne("BlueSite.Data.Entities.Note", "Note")
@@ -599,13 +561,6 @@ namespace BlueSite.Data.Migrations
                         .HasForeignKey("PhoneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.Contact", b =>
-                {
-                    b.HasOne("BlueSite.Data.Entities.Campaign", null)
-                        .WithMany("Contacts")
-                        .HasForeignKey("CampaignId");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.ContactPhones", b =>

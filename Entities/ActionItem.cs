@@ -25,7 +25,9 @@ namespace BlueSite.Data.Entities
         public string SearchID { get; set; }
         public bool IsDone { get; set; } = false;
         public int? Parent { get; set; }
-        public int? ProjectId { get; set; }
+
+        public int? CampaignId { get; set; }
+        public int? ContactId { get; set; }
 
         //public ICollection<Company> Companies { get; set; }
         //public ICollection<Contact> Contacts { get; set; }

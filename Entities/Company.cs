@@ -40,7 +40,6 @@ namespace BlueSite.Data.Entities
         public IEnumerable<CompanyPhones> CompanyPhones {  get; set; }
         public IEnumerable<CompanyPhones> ContactPhones {  get; set; }
 
-       //public ICollection<Contact> Contacts { get; set; }
-        //public ICollection<Note> Notes { get; set; }
+        public string Notes { get; set; }
     }
 }

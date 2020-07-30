@@ -23,6 +23,8 @@ namespace BlueSite.Data.Entities
         public DbSet<CompanyPhones> CompanyPhones { get; set; }
         public DbSet<ContactPhones> ContactPhones { get; set; }
 
+        public DbSet<Campaign> Campaigns { get; set; }
+
         public DbSet<CompanyContactRelationship> CompanyContactRelationships { get; set; }
 
         public BlueSiteContext(DbContextOptions<BlueSiteContext> options)
