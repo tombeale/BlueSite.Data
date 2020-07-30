@@ -114,12 +114,22 @@ namespace BlueSite.Data
         {
             get
             {
-                return _context.Contacts.Include(c => c.Phones).ToList();
+                return _context.Contacts.Include(c => c.Phones).OrderBy(c => c.LastName).ToList();
             }
         }
         public Contact GetContact(int id)
         {
             return _context.Contacts.Where(x => x.ContactId == id).Include(c => c.Phones).FirstOrDefault();
+        }
+
+        public List<Contact> GetAllContacts()
+        {
+                return _context.Contacts.ToList();
+        }
+
+        public List<CompanyContactRelationship> GetCompanyContactRelationships()
+        {
+                return _context.CompanyContactRelationships.ToList();
         }
 
         public List<Contact> GetUnrelatedCompanyContacts(int id)
