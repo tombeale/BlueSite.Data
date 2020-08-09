@@ -26,6 +26,8 @@ namespace BlueSite.Data.Entities
         public bool IsDone { get; set; } = false;
         public int? Parent { get; set; }
 
+        public string Outcome { get; set; }
+
         public int? CampaignId { get; set; }
         public int? ContactId { get; set; }
 

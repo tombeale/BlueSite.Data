@@ -14,7 +14,12 @@ namespace BlueSite.Data.Entities
         [MaxLength(100)]
         public string Name {  get; set; }
 
+        [MaxLength(50)]
+        public string Status {  get; set; }
+
         public int? CompanyId { get; set; }
+
+        public string CompanyName { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }

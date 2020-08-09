@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200801232736_Added Statuses Table")]
+    partial class AddedStatusesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +34,6 @@ namespace BlueSite.Data.Migrations
                     b.Property<DateTime?>("EndDate");
 
                     b.Property<bool>("IsDone");
-
-                    b.Property<string>("Outcome");
 
                     b.Property<int?>("Parent");
 
@@ -114,8 +114,6 @@ namespace BlueSite.Data.Migrations
 
                     b.Property<int?>("CompanyId");
 
-                    b.Property<string>("CompanyName");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -136,25 +134,6 @@ namespace BlueSite.Data.Migrations
                     b.HasKey("CampaignId");
 
                     b.ToTable("Campaigns");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.CampaignActionRelationship", b =>
-                {
-                    b.Property<int>("CampaignActionRelationshipId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ActionId");
-
-                    b.Property<int>("CampaignId");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.HasKey("CampaignActionRelationshipId");
-
-                    b.ToTable("CampaignActionRelationships");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.Company", b =>
@@ -524,56 +503,6 @@ namespace BlueSite.Data.Migrations
                     b.ToTable("Statuses");
                 });
 
-            modelBuilder.Entity("BlueSite.Data.Entities.Topic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Caption")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ListType")
-                        .HasMaxLength(10);
-
-                    b.Property<int>("ParentId");
-
-                    b.Property<string>("ParentType")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Text")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Topics");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.TopicPoint", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Done");
-
-                    b.Property<string>("Notes");
-
-                    b.Property<int>("Order");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<int>("TopicId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TopicId");
-
-                    b.ToTable("TopicPoints");
-                });
-
             modelBuilder.Entity("BlueSite.Data.Entities.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -738,15 +667,6 @@ namespace BlueSite.Data.Migrations
                     b.HasOne("BlueSite.Data.Entities.Contact", null)
                         .WithMany("Phones")
                         .HasForeignKey("ContactId");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.TopicPoint", b =>
-                {
-                    b.HasOne("BlueSite.Data.Entities.Topic", null)
-                        .WithMany("Topics")
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

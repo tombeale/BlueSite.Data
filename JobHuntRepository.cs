@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BlueSite.Data
 {
@@ -25,7 +26,7 @@ namespace BlueSite.Data
             return _context.Users.Where(u => u.SignOn == signon).FirstOrDefault();
         }
 
-        public string GetUserPref(int userId, string pref, string defValue)
+        public string GetUserPref(int userId, string pref, string defValue = "")
         {
             UserPref p = _context.UserPrefs.Where(up => up.UserId == userId && up.Pref == pref).FirstOrDefault();
             return (p != null) ? p.Value : defValue;
@@ -65,9 +66,24 @@ namespace BlueSite.Data
             }
         }
 
+        public ActionType[] GetActionTypes()
+        {
+            return _context.ActionTypes.OrderBy(f => f.Order).ToArray();
+        }
+
         public ActionItem GetAction(int id)
         {
             return _context.ActionItems.Where(x => x.ActionItemId == id).Include(b => b.Notes).FirstOrDefault();
+        }
+
+        public List<ActionItem> GetAllCampaignActions()
+        {
+            return AllActions.Where(a => a.CampaignId != null).OrderBy(x => x.StartDate).ToList();
+        }
+
+        public List<ActionItem> GetActionsForCampaign( int campaignId)
+        {
+            return _context.ActionItems.Where(a => a.CampaignId == campaignId).OrderBy(x => x.StartDate).ToList();
         }
 
         public List<ActionSetId> GetActionSetIdList()
@@ -82,7 +98,66 @@ namespace BlueSite.Data
             return returnList;
         }
 
+        public bool AddCampaignActionRelationship(int campaignId, int actionId, string description = "")
+        {
+            try
+            {
+                CampaignActionRelationship Rel = new CampaignActionRelationship();
+                Rel.CampaignId  = campaignId;
+                Rel.ActionId    = actionId;
+                Rel.Description = description;
+                _context.CampaignActionRelationships.Add(Rel);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
         /* ***********************************************************
+         * Topics
+         * ******************************************************** */
+
+        public List<Topic> GetTopicsForParentId(string parentType, int parentId)
+        {
+            var Topics = _context.Topics.Where(t => t.ParentType == parentType && t.ParentId == parentId).ToList();
+            foreach( var topic in Topics)
+            {
+                topic.Topics = GetTopicPointsForTopic(topic.Id);
+            }
+            return Topics;
+        }
+
+
+
+        public List<TopicPoint> GetTopicPointsForTopic(int TopicId)
+        {
+            var Points = _context.TopicPoints.Where(p => p.TopicId == TopicId).OrderBy(p => p.Order).ToList();
+            return Points;
+        }
+
+        /* ***********************************************************
+         * Campaigns
+         * ******************************************************** */
+
+        public List<Campaign> AllCampaigns
+        {
+            get
+            {
+                List<Campaign> campaigns = _context.Campaigns.ToList();
+                return campaigns;
+            }
+        }
+
+         public Campaign GetCampaign(int id)
+        {
+            return _context.Campaigns.Where(x => x.CampaignId == id).FirstOrDefault();
+        }
+
+
+       /* ***********************************************************
          * Companies
          * ******************************************************** */
         public List<Company> AllCompanies
@@ -159,6 +234,17 @@ namespace BlueSite.Data
         public List<Phone> GetPhonesForContact(int ContactId)
         {
             return _context.Phones.Where(p => p.ContactId == ContactId).ToList();
+        }
+
+
+
+        /* ***********************************************************
+         * Lookup Tables
+         * ******************************************************** */
+
+        public List<Status> GetStatuses()
+        {
+            return _context.Statuses.ToList();
         }
 
 
