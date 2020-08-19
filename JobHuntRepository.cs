@@ -151,7 +151,7 @@ namespace BlueSite.Data
             }
         }
 
-         public Campaign GetCampaign(int id)
+        public Campaign GetCampaign(int id)
         {
             return _context.Campaigns.Where(x => x.CampaignId == id).FirstOrDefault();
         }
@@ -170,6 +170,12 @@ namespace BlueSite.Data
         public Company GetCompany(int id)
         {
             return _context.Companies.Where(x => x.CompanyId == id).FirstOrDefault();
+        }
+
+        public Company GetCompanyFromCampaignId(int id)
+        {
+            Campaign camp = GetCampaign(id);
+            return GetCompany(camp.CompanyId ?? 0);
         }
 
         public CompanyType[] GetCompanyTypes()
@@ -278,5 +284,34 @@ namespace BlueSite.Data
                 return e.Message;
             }
         }
+
+        /* ***********************************************************
+         * Resume-Related Data
+         * ******************************************************** */
+
+        public List<string> GetLanguageNames
+        {
+            get
+            {
+                return _context.LanguageEntries.Select(n => n.Name).ToList();
+            }
+        }
+
+        public List<LanguageEntry> GetLanguages
+        {
+            get
+            {
+                return _context.LanguageEntries.ToList();
+            }
+        }
+
+        public List<LanguageTagMapping> GetLanguageMap
+        {
+            get
+            {
+                return _context.LanguageTagMappings.ToList();
+            }
+        }
+
     }
 }

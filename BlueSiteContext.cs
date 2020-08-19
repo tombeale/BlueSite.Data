@@ -30,6 +30,9 @@ namespace BlueSite.Data.Entities
 
         public DbSet<Campaign> Campaigns { get; set; }
 
+        public DbSet<LanguageEntry> LanguageEntries { get; set; }
+        public DbSet<LanguageTagMapping> LanguageTagMappings { get; set; }
+
         public DbSet<CompanyContactRelationship> CompanyContactRelationships { get; set; }
         public DbSet<CampaignActionRelationship> CampaignActionRelationships { get; set; }
 

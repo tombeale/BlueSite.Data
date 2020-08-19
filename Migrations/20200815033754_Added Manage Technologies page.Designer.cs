@@ -4,14 +4,16 @@ using BlueSite.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueSite.Data.Migrations
 {
     [DbContext(typeof(BlueSiteContext))]
-    partial class BlueSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20200815033754_Added Manage Technologies page")]
+    partial class AddedManageTechnologiespage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -415,33 +417,16 @@ namespace BlueSite.Data.Migrations
                     b.Property<bool>("IsEstimate");
 
                     b.Property<string>("Key")
-                        .HasMaxLength(30);
+                        .HasMaxLength(10);
 
                     b.Property<string>("Name")
-                        .HasMaxLength(40);
+                        .HasMaxLength(30);
 
                     b.Property<string>("Text");
 
                     b.HasKey("LanguageEntryId");
 
                     b.ToTable("LanguageEntries");
-                });
-
-            modelBuilder.Entity("BlueSite.Data.Entities.LanguageTagMapping", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Tag")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LanguageTagMappings");
                 });
 
             modelBuilder.Entity("BlueSite.Data.Entities.Note", b =>
